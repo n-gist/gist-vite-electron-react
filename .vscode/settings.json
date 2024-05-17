@@ -1,0 +1,15 @@
+{
+    "files.autoSave": "onWindowChange",
+    "files.autoSaveWorkspaceFilesOnly": true,
+    "errorLens.followCursor": "allLinesExceptActive",
+    "errorLens.enabledDiagnosticLevels": [
+        "error"
+    ],
+    "errorLens.messageBackgroundMode": "message",
+    "eslint.lintTask.enable": true,
+    "files.exclude": {
+    },
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "todo-tree.general.rootFolder": "${workspaceFolder}/src",
+    "typescript.preferences.preferTypeOnlyAutoImports": true
+}
