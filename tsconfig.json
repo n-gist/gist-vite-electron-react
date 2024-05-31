@@ -13,16 +13,16 @@
         "isolatedModules": true,
         "noEmit": true,
         "jsx": "react-jsx",
+        "outDir": "./dist/tsc",
 
         /* Linting */
         "strict": true,
-        "noUnusedLocals": true,
+        "noUnusedLocals": false,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
         
         "strictNullChecks": true,
         "forceConsistentCasingInFileNames": true,
-        "tsBuildInfoFile": "D:\\Temp\\other\\ops.tsbuildinfo",
         "incremental": true
     },
     "include": ["./src", "vite.config.ts", "eslint.config.js"],
