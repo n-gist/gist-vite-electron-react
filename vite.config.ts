@@ -1,7 +1,20 @@
 import { rmSync } from 'node:fs'
-import { defineConfig, type LogLevel } from 'vite'
+import { defineConfig, type LogLevel, type ViteDevServer, type PluginOption } from 'vite'
 import electron from 'vite-plugin-electron/simple'
 import react from '@vitejs/plugin-react'
+import { join } from 'path'
+
+const entryHtml = '/src/renderer/index.html'
+
+const resolveMainPage: () => PluginOption = () => ({
+    name: 'redirect-main-page',
+    configureServer(server: ViteDevServer) {
+        server.middlewares.use((req, _res, next) => {
+            if (req.originalUrl === '/' || req.originalUrl === '/index.html') req.url = entryHtml
+            next()
+        })
+    }
+})
 
 export default defineConfig(({ command }) => {
     
@@ -20,6 +33,7 @@ export default defineConfig(({ command }) => {
         publicDir,
         logLevel,
         plugins: [
+            resolveMainPage(),
             react(),
             electron({
                 main: {
@@ -58,6 +72,13 @@ export default defineConfig(({ command }) => {
                 },
                 renderer: {},
             }),
-        ]
+        ],
+        build: {
+            rollupOptions: {
+                input: {
+                    main: join(__dirname, entryHtml)
+                }
+            }
+        }
     }
 })

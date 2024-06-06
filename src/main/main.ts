@@ -27,11 +27,14 @@ function createWindow() {
         ipcMain.once('renderer-process-message', () => { clearTimeout(noMsgTimeout) })
         win?.webContents.send('main-process-message', (new Date).toLocaleString())
     })
-
+    
+    const entryHtml = 'src/renderer/index.html'
     if (process.env.VITE_DEV_SERVER_URL) {
-        void win.loadURL(process.env.VITE_DEV_SERVER_URL)
+        const loadUrl = process.env.VITE_DEV_SERVER_URL + entryHtml
+        win.loadURL(loadUrl).catch( () => { console.log(`Can't loadUrl ${loadUrl}`) } )
     } else {
-        void win.loadFile(path.join(DIST, 'index.html'))
+        const loadFile = path.join(DIST, entryHtml)
+        win.loadFile(loadFile).catch( () => { console.log(`Can't loadFile ${loadFile}`) } )
     }
 }
 
